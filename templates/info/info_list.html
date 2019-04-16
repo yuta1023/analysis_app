@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="info">
+        <h1>Information</h1>
+    </div>
+    {% for post in posts %}
+    <div class="post">
+        <ul>
+            <li class="date">
+                    {{ post.published_date }}
+            </li>
+            <li class="post_title"><a href="{% url 'info:info_detail' pk=post.pk %}">{{ post.title }}</a></li>
+        </ul>
+    </div>
+    {% endfor %}
+
+{% endblock %}

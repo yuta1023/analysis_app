@@ -1,0 +1,32 @@
+{% extends 'analysis_base.html' %}
+
+{% block title %}Pole figure -overplot-{% endblock %}
+{% block explain %}
+
+{% endblock %}
+{% block input %}
+<form action="" method="get">
+{% csrf_token %}
+    1st EBSD<br>
+    ND&nbsp;&nbsp;&nbsp;{{ nd_form1 }}<br>
+    RD&nbsp;&nbsp;&nbsp;{{ rd_form1 }}<br>
+    2nd EBSD<br>
+    ND&nbsp;&nbsp;&nbsp;{{ nd_form2 }}<br>
+    RD&nbsp;&nbsp;&nbsp;{{ rd_form2 }}<br>
+<input type="submit" value="Submit">
+</form>
+{% endblock %}
+
+{% block result %}
+    <section>
+        1st
+        ND{{ nd1 }}
+        RD{{ rd1 }}<br>
+        2nd
+        ND{{ nd2 }}
+        RD{{ rd2 }}<br>
+    </section>
+    <section class="img-result">
+        <img src="{% url 'analysis:img_pole_overplot' %}" alt="">
+    </section>
+{% endblock %}

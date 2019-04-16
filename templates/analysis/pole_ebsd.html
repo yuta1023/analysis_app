@@ -1,0 +1,25 @@
+{% extends 'analysis_base.html' %}
+
+{% block title %}Pole figure -normal-{% endblock %}
+{% block explain %}
+
+{% endblock %}
+{% block input %}
+<form action="" method="get">
+{% csrf_token %}
+    EBSD<br>
+    ND&nbsp;&nbsp;&nbsp;{{ nd_form }}<br>
+    RD&nbsp;&nbsp;&nbsp;{{ rd_form }}<br>
+<input type="submit" value="Submit">
+</form>
+{% endblock %}
+
+{% block result %}
+    <section>
+        ND{{ nd }}
+        RD{{ rd }}<br>
+    </section>
+    <section class="img-result">
+        <img src="{% url 'analysis:img_pole_ebsd' %}" alt="">
+    </section>
+{% endblock %}

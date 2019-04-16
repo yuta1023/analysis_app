@@ -1,0 +1,34 @@
+{% extends 'analysis_base.html' %}
+
+{% block title %}Direction analysis{% endblock %}
+{% block explain %}
+
+{% endblock %}
+{% block input %}
+<form action="" method="get">
+{% csrf_token %}
+    EBSD<br>
+    ND&nbsp;&nbsp;&nbsp;{{ nd_form }}<br>
+    RD&nbsp;&nbsp;&nbsp;{{ rd_form }}<br>
+    Direction<br>
+    &phi;=&nbsp;{{ phi_form }}
+    &theta;=&nbsp;{{ theta_form }}<br>
+    EBSD rotation angle {{ rot_form }}<br>
+<input type="submit" value="Submit">
+</form>
+{% endblock %}
+
+{% block result %}
+    <section>
+        EBSD
+        ND{{ nd }}
+        RD{{ rd }}<br>
+        Direction
+        &phi;={{ phi }}
+        &theta;={{ theta }}<br>
+        rotation angle (deg){{ rot }}
+    </section>
+    <section class="img-result">
+        <img src="{% url 'analysis:img_direction' %}" alt="">
+    </section>
+{% endblock %}

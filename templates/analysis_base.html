@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <h1 class='analysis_title'> {% block title %}{% endblock %}</h1>
+    {% block explain %}
+
+    {% endblock %}
+    <h2>Input data</h2>
+    {% block input %}
+
+    {% endblock %}
+    <br>
+    <br>
+    <br>
+===============================================================================
+    <h2>Result</h2>
+    {% block result %}
+
+    {% endblock %}
+{% endblock %}

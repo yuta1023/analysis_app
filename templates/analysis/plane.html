@@ -1,0 +1,21 @@
+{% extends 'analysis_base.html' %}
+
+{% block title %}Plane analysis{% endblock %}
+{% block explain %}
+作成中
+{% endblock %}
+{% block input %}
+<form action="" method="get">
+{% csrf_token %}
+<input type="submit" value="Submit">
+</form>
+{% endblock %}
+
+{% block result %}
+    <section>
+
+    </section>
+    <section class="img-result">
+
+    </section>
+{% endblock %}
