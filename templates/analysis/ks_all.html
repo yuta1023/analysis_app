@@ -1,0 +1,38 @@
+{% extends 'analysis_base.html' %}
+
+{% block title %}Pole figure -auto from EBSD-{% endblock %}
+{% block explain %}
+
+{% endblock %}
+{% block input %}
+<form action="" method="post">
+{% csrf_token %}
+    fcc EBSD<br>
+    ND&nbsp;&nbsp;&nbsp;{{ nd_form1 }}<br>
+    RD&nbsp;&nbsp;&nbsp;{{ rd_form1 }}<br>
+    bcc EBSD<br>
+    ND&nbsp;&nbsp;&nbsp;{{ nd_form2 }}<br>
+    RD&nbsp;&nbsp;&nbsp;{{ rd_form2 }}<br>
+<input type="submit" value="Submit">
+</form>
+{% endblock %}
+
+{% block result %}
+    <section>
+        fcc
+        ND{{ nd_fcc }}
+        RD{{ rd_fcc }}
+        plane{{ p_fcc }}
+        direction{{ d_fcc }}<br>
+        bcc
+        ND{{ nd_bcc }}
+        RD{{ rd_bcc }}
+        plane{{ p_bcc }}
+        direction{{ d_bcc }}<br>
+        deviation from plane parallel: {{ plane }}<br>
+        deviation from direction parallel: {{ direction }}<br>
+        deviation from K-S OR : {{ ks }}<br>
+    </section>
+    <section class="img-result">
+    </section>
+{% endblock %}

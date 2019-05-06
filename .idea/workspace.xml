@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f713cda-2924-4565-9856-f5481c32e9a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/function_3d.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/function_3d.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/info/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/info/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/info/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/info/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/analysis/direction.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/analysis/direction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/analysis/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/analysis/menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/analysis/plane.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/analysis/plane.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/analysis/pole_ebsd.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/analysis/pole_ebsd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/analysis/pole_overplot.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/analysis/pole_overplot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-    </list>
+    <list default="true" id="0f713cda-2924-4565-9856-f5481c32e9a9" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,8 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analysis/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="870">
-              <caret line="58" column="31" lean-forward="true" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+            <state relative-caret-position="660">
+              <caret line="44" column="48" lean-forward="true" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -394,12 +378,20 @@
       <workItem from="1557008157360" duration="12484000" />
       <workItem from="1557072923968" duration="1484000" />
       <workItem from="1557109219666" duration="2607000" />
-      <workItem from="1557121841847" duration="941000" />
+      <workItem from="1557121841847" duration="1257000" />
     </task>
+    <task id="LOCAL-00001" summary="second version">
+      <created>1557122944917</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1557122944917</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91425000" />
+    <option name="totallyTimeSpent" value="91741000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="491" y="148" width="1342" height="1000" extended-state="0" />
@@ -430,6 +422,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="second version" />
+    <option name="LAST_COMMIT_MESSAGE" value="second version" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/info/tests.py">
@@ -704,8 +700,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/analysis/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="58" column="31" lean-forward="true" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+        <state relative-caret-position="660">
+          <caret line="44" column="48" lean-forward="true" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>

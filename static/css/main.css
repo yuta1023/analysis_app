@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+.page-header {
+    background-color: #ff9400;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+    font-family: 'Lobster', cursive;
+}
+
+.nav {
+    font-size: 20pt;
+    font-family: 'Lobster', cursive;
+}
+.nav li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 30px;
+}
+.nav ul {
+    margin: 0 0 0 0;
+    padding: 20px 10px 15px 20px;
+}
+.nav a:link, .nav a:visited, .nav a:hover, .nav a:active {
+    color: #3c454d;
+    text-decoration: none;
+}
+
+.content_container {
+    padding: 20px 10px 15px 20px;
+}
+.post li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 30px;
+}
+.post ul {
+    margin: 0 0 0 0;
+    padding: 10px 10px 0 20px;
+}
+.post a:link, .post a:visited, .post a:hover, .post a:active {
+    color: #3c454d;
+    text-decoration: none;
+}
+.date {
+    font-size: 10pt;
+}
+.post_title {
+    font-size: 15pt;
+}
+
+.about, .info, .analysis, .contact-link, .contact, .link {
+    font-family: 'Lobster', cursive;
+    font-size: 15pt;
+}
+
+.img-result img {
+    width: 80%;
+}
