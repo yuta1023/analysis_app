@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 
 
 # 結晶方位行列計算(回転考慮) ex. nd=[1,1,1] rd = [2,1,2], 反時計回りr度
@@ -11,9 +12,9 @@ def crystal_matrix_rot(nd, rd, rot_deg):
     rd_norm = rd / np.linalg.norm(rd)
     td_norm = td / np.linalg.norm(td)
     # 結晶方位行列
-    aa = np.matrix([[td_norm[0], -rd_norm[0], nd_norm[0]],
-                    [td_norm[1], -rd_norm[1], nd_norm[1]],
-                    [td_norm[2], -rd_norm[2], nd_norm[2]]])
+    aa = np.matrix([[-td_norm[0], -rd_norm[0], -nd_norm[0]],
+                    [-td_norm[1], -rd_norm[1], -nd_norm[1]],
+                    [-td_norm[2], -rd_norm[2], -nd_norm[2]]])
     # 結晶方位行列の回転
     rot = np.deg2rad(rot_deg)
     r_matrix = np.matrix([[np.cos(rot), -np.sin(rot), 0],
@@ -91,3 +92,77 @@ def pol_plot(r_theta, ax, color):
     t = r_theta.iloc[:, 2]
     rr = r_theta.iloc[:, 0]
     ax.scatter(t, rr, c=color, s=30)
+
+
+# ヒストグラム作成
+def create_hist(df_r_thrta):
+    # ヒストグラム作成
+    r_bin = np.arange(-0.1, 1.01, 0.1)
+    theta_bin = np.arange(-90, 271, 10)
+    r_list = df_r_thrta.iloc[:, 0].values
+    theta_list = df_r_thrta.iloc[:, 1].values
+    # 2次元ヒストグラム作成
+    h, r_bin, theta_bin = np.histogram2d(theta_list, r_list, bins=(theta_bin, r_bin))
+    # r→ビン終端, theta→ビン中心
+    r_bin_fin = np.arange(0, 1.01, 0.1)
+    theta_bin_cen = np.arange(-85, 266, 10)
+    # データフレーム化
+    df_hist = pd.DataFrame(h, columns=r_bin_fin, index=theta_bin_cen)
+    # theta,r,countを縦方向に並べる
+    frame = None
+    for i in range(0, len(theta_bin_cen)):
+        theta = np.full(11, theta_bin_cen[i])
+        r = r_bin_fin
+        count = df_hist.iloc[i, :].values
+        theta_arr = np.array([theta])
+        r_arr = np.array([r])
+        count_arr = np.array([count])
+        if i == 0:
+            frame = np.hstack((theta_arr.T, r_arr.T, count_arr.T))
+        else:
+            block = np.hstack((theta_arr.T, r_arr.T, count_arr.T))
+            frame = np.vstack((frame, block))
+    df_trc = pd.DataFrame(frame, columns=["theta", "r", "count"])
+    # カウントの総和
+    count_sum = np.sum(df_trc.iloc[:, 2].values)
+    # r=0.1のときの頻度を計算
+    freq_01 = []
+    for i in range(0, 36):
+        num = 1 + 11 * i
+        freq = df_trc.iat[num, 2] / ((np.cos(2 * np.arctan(df_trc.iat[num, 1] - 0.1)) - np.cos(
+            2 * np.arctan(df_trc.iat[num, 1]))) / 36 * count_sum)
+        freq_01.append(freq)
+    freq_0 = np.mean(freq_01)
+    # 頻度値を計算する
+    freq_all = []
+    for i in range(0, len(df_trc)):
+        if i % 11 == 0:
+            freq = freq_0
+        else:
+            freq = df_trc.iat[i, 2] / ((np.cos(2 * np.arctan(df_trc.iat[i, 1] - 0.1)) - np.cos(
+                2 * np.arctan(df_trc.iat[i, 1]))) / 36 * count_sum)
+        freq_all.append(freq)
+    # データフレームをr,thetaの格子状のデータフレームに
+    zz = None
+    for i in range(0, 36):
+        num = 11 * i
+        xx = freq_all[num:num + 11]
+        if i == 0:
+            zz = np.array([xx])
+        else:
+            yy = np.array([xx])
+            zz = np.vstack((zz, yy))
+    df_for_polar = pd.DataFrame(zz, columns=r_bin_fin, index=theta_bin_cen)
+    # グラフをきれいにするためにtheta_bin_cen=275(=-85)を追加
+    plus = np.array([df_for_polar.iloc[0, :].values])
+    df_plus = pd.DataFrame(plus, columns=r_bin_fin, index=[275])
+    df_for_graph = pd.concat([df_for_polar, df_plus])
+    return df_for_graph
+
+
+def plot_hist(df_for_graph, ax):
+    r_bin_fin = np.arange(0, 1.01, 0.1)
+    theta_bin_cen_ex = np.arange(-85, 276, 10)
+    data = np.array(df_for_graph)
+    ctf = ax.contourf(theta_bin_cen_ex * np.pi / 180, r_bin_fin, data.T, 150, cmap=cm.jet)
+    plt.colorbar(ctf, pad=0.15, orientation="vertical")

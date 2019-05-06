@@ -48,3 +48,30 @@ class ThetaForm(forms.Form):
 class RotationForm(forms.Form):
     rot = forms.FloatField(label='')
 
+
+class DirectionForm1(forms.Form):
+    d1_h = forms.FloatField(label='h')
+    d1_k = forms.FloatField(label='k')
+    d1_l = forms.FloatField(label='l')
+
+
+class DirectionForm2(forms.Form):
+    d2_h = forms.FloatField(label='h')
+    d2_k = forms.FloatField(label='k')
+    d2_l = forms.FloatField(label='l')
+
+
+class PlaneForm1(forms.Form):
+    p1_h = forms.FloatField(label='h')
+    p1_k = forms.FloatField(label='k')
+    p1_l = forms.FloatField(label='l')
+
+
+class PlaneForm2(forms.Form):
+    p2_h = forms.FloatField(label='h')
+    p2_k = forms.FloatField(label='k')
+    p2_l = forms.FloatField(label='l')
+
+
+class FileForm(forms.Form):
+    file = forms.FileField(label='')

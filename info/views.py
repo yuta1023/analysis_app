@@ -22,3 +22,7 @@ def info_detail(request, pk):
 
 def about(request):
     return render(request, 'info/about.html')
+
+
+def contact(request):
+    return render(request, 'info/contact.html')

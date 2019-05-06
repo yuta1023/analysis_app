@@ -11,4 +11,7 @@ urlpatterns = [
     path('direction', views.direction_analysis, name='direction_analysis'),
     path('direction/plot', views.img_direction, name='img_direction'),
     path('plane', views.plane_analysis, name='plane_analysis'),
+    path('plane/plot',views.img_plane, name='img_plane'),
+    path('ks_one', views.ks_one, name='ks_one'),
+    path('ks_all', views.ks_all, name='ks_all'),
 ]

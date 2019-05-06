@@ -2,20 +2,29 @@
 
 {% block title %}Plane analysis{% endblock %}
 {% block explain %}
-作成中
+
 {% endblock %}
 {% block input %}
-<form action="" method="get">
+<form action="" method="post" enctype="multipart/form-data">
 {% csrf_token %}
+    EBSD<br>
+    ND&nbsp;&nbsp;&nbsp;{{ nd_form }}<br>
+    RD&nbsp;&nbsp;&nbsp;{{ rd_form }}<br>
+    EBSD rotation angle {{ rot_form }}<br>
+    plane data (CSV file){{ file_form }}<br>
 <input type="submit" value="Submit">
 </form>
 {% endblock %}
 
 {% block result %}
     <section>
-
+        EBSD
+        ND{{ nd }}
+        RD{{ rd }}<br>
+        rotation angle (deg) {{ rot }}<br>
+        plane data {{ file_name }}<br>
     </section>
     <section class="img-result">
-
+            <img src="{% url 'analysis:img_plane' %}" alt="">
     </section>
 {% endblock %}
