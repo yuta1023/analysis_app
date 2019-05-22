@@ -1,16 +1,48 @@
 {% extends 'analysis_base.html' %}
+{% load bootstrap4 %}
 
-{% block title %}Pole figure -normal-{% endblock %}
-{% block explain %}
-
+{% block title %}
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            Pole figure -normal-
+        </li>
+        <li class="list-inline-item">
+            <button type="button" class="btn" data-toggle="modal" data-target="#polone"><i class="fas fa-info-circle fa-2x icon-col"></i></button>
+            <div class="modal fade" id="polone" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="polone">Pole figure -normal-</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Create a pole figure of the ND center by submitting the ND and RD directions
+                                of the crystal orientation obtained from EBSD<br>
+                                Input data: <br>
+                                ND and RD of crystal obtained from "OIM analysis"
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 {% endblock %}
+
 {% block input %}
 <form action="" method="post">
 {% csrf_token %}
     EBSD<br>
-    ND&nbsp;&nbsp;&nbsp;{{ nd_form }}<br>
-    RD&nbsp;&nbsp;&nbsp;{{ rd_form }}<br>
-<input type="submit" value="Submit">
+    <div class="form-row flex-column flex-sm-row">
+        ND&nbsp;&nbsp;&nbsp;{% bootstrap_form nd_form layout='inline' size='small' %}<br>
+    </div>
+    <div class="form-row flex-column flex-sm-row">
+        RD&nbsp;&nbsp;&nbsp;{% bootstrap_form rd_form layout='inline' size='small' %}<br>
+    </div>
+<button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}
 

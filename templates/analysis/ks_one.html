@@ -1,25 +1,69 @@
 {% extends 'analysis_base.html' %}
+{% load bootstrap4 %}
 
-{% block title %}Pole figure -normal-{% endblock %}
-{% block explain %}
-
+{% block title %}
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            K-S OR analysis -basic-
+        </li>
+        <li class="list-inline-item">
+            <button type="button" class="btn" data-toggle="modal" data-target="#ksone"><i class="fas fa-info-circle fa-2x icon-col"></i></button>
+            <div class="modal fade" id="ksone" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="ksone">K-S OR analysis -basic-</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Calculate deviation from K-S orientation relationship<br>
+                                Input data: <br>
+                                ND and RD of crystal obtained from "OIM analysis"<br>
+                                Orientations corresponding to plane parallel and direction parallel of fcc and bcc respectively
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 {% endblock %}
+
 {% block input %}
 <form action="" method="post">
 {% csrf_token %}
     fcc EBSD<br>
-    ND&nbsp;&nbsp;&nbsp;{{ nd_form1 }}<br>
-    RD&nbsp;&nbsp;&nbsp;{{ rd_form1 }}<br>
+    <div class="form-row flex-column flex-sm-row">
+        ND&nbsp;&nbsp;&nbsp;{% bootstrap_form nd_form1 layout='inline' size='small' %}<br>
+    </div>
+    <div class="form-row flex-column flex-sm-row">
+        RD&nbsp;&nbsp;&nbsp;{% bootstrap_form rd_form1 layout='inline' size='small' %}<br>
+    </div>
     bcc EBSD<br>
-    ND&nbsp;&nbsp;&nbsp;{{ nd_form2 }}<br>
-    RD&nbsp;&nbsp;&nbsp;{{ rd_form2 }}<br>
+    <div class="form-row flex-column flex-sm-row">
+        ND&nbsp;&nbsp;&nbsp;{% bootstrap_form nd_form2 layout='inline' size='small' %}<br>
+    </div>
+    <div class="form-row flex-column flex-sm-row">
+        RD&nbsp;&nbsp;&nbsp;{% bootstrap_form rd_form2 layout='inline' size='small' %}<br>
+    </div>
     plane parallel<br>
-    fcc&nbsp;&nbsp;{{ p1_form }}<br>
-    bcc&nbsp;&nbsp;{{ p2_form }}<br>
-    direction parallel<br>
-    fcc&nbsp;&nbsp;{{ d1_form }}<br>
-    bcc&nbsp;&nbsp;{{ d2_form }}<br>
-<input type="submit" value="Submit">
+    <div class="form-row flex-column flex-sm-row">
+        fcc&nbsp;&nbsp;&nbsp;{% bootstrap_form p1_form layout='inline' size='small' %}<br>
+    </div>
+    <div class="form-row flex-column flex-sm-row">
+        bcc&nbsp;&nbsp;&nbsp;{% bootstrap_form p2_form layout='inline' size='small' %}<br>
+    </div>
+    direction parallel<<br>
+    <div class="form-row flex-column flex-sm-row">
+        fcc&nbsp;&nbsp;&nbsp;{% bootstrap_form d1_form layout='inline' size='small' %}<br>
+    </div>
+    <div class="form-row flex-column flex-sm-row">
+        bcc&nbsp;&nbsp;&nbsp;{% bootstrap_form d2_form layout='inline' size='small' %}<br>
+    </div>
+<button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}
 

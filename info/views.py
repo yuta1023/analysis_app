@@ -24,5 +24,5 @@ def about(request):
     return render(request, 'info/about.html')
 
 
-def contact(request):
-    return render(request, 'info/contact.html')
+def link(request):
+    return render(request, 'info/link.html')

@@ -7,7 +7,6 @@ import itertools
 import pandas as pd
 import numpy as np
 import matplotlib
-
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 from . import function_pole
@@ -241,19 +240,15 @@ def plane_analysis(request):
     rd_pla = [float(s) for s in rd_pre]
     rot_pla = float(rot)
     if request.method == 'POST':
-        file_form = forms.FileForm(request.GET, request.FILES)
-        name = None
-        if file_form.is_valid():
-            df_xyz = None
-            name = request.FILES['file'].name
-            ext = os.path.splitext(name)
-            if ext[1] == ".csv":
-                me = io.TextIOWrapper(request.FILES['file'].file, encoding='utf-8')
-                df_xyz = pd.read_csv(me)
-            else:
-                pass
+        df_xyz = None
+        name = request.FILES['file'].name
+        ext = os.path.splitext(name)
+        if ext[1] == ".csv":
+            me = io.TextIOWrapper(request.FILES['file'].file, encoding='utf-8')
+            df_xyz = pd.read_csv(me, header=None)
+        else:
+            pass
     else:
-        file_form = forms.FileForm()
         name = None
     dic = {'nd_form': f1_d,
            'rd_form': f2_d,
@@ -261,7 +256,6 @@ def plane_analysis(request):
            'nd': nd_pla,
            'rd': rd_pla,
            'rot': rot_pla,
-           'file_form': file_form,
            'file_name': name,
            }
     return render(request, 'analysis/plane.html', dic)

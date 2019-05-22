@@ -1,23 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div>
-        Welcome to Crystallographic Analysis site.<br>
-        This site is created by a student learning material engineering.
+    <div class="col text-left mt-4">
+        <div>
+            Welcome to pMIPHA -Crystallography version-.<br>
+            This site is created by a student learning material engineering.
+        </div>
+        <div class="mt-5">
+            <h2 class="new_info font-lobster">New information</h2>
+            {% for post in posts %}
+                <div class="post">
+                    <ul>
+                        <li class="date">{{ post.published_date }}</li>
+                        <li class="post_title"><a href="{% url 'info:info_detail' pk=post.pk %}">{{ post.title }}</a></li>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-    <br>
-    <div class="new_info">
-        <h2>New information</h2>
-        {% for post in posts %}
-            <div class="post">
-                <ul>
-                    <li class="date">
-                        {{ post.published_date }}
-                    </li>
-                    <li class="post_title"><a href="{% url 'info:info_detail' pk=post.pk %}">{{ post.title }}</a></li>
-                </ul>
-            </div>
-        {% endfor %}
-    </div>
-
 {% endblock %}

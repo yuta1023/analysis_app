@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-   <h1 class='analysis_title'> {% block title %}{% endblock %}</h1>
-    {% block explain %}
+    <div class="analysis_base mt-4">
+        <h1 class='analysis_title font-lobster'> {% block title %}{% endblock %}</h1>
 
-    {% endblock %}
-    <h2>Input data</h2>
-    {% block input %}
+        <h2>Input data</h2>
+        {% block input %}
 
-    {% endblock %}
-    <br>
-    <br>
-    <br>
-===============================================================================
-    <h2>Result</h2>
-    {% block result %}
+        {% endblock %}
+        <br>
+        <br>
+        <br>
+        <p class="double"></p>
+        <h2>Result</h2>
+        {% block result %}
 
-    {% endblock %}
+        {% endblock %}
+    </div>
 {% endblock %}
+

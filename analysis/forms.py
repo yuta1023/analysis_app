@@ -71,7 +71,3 @@ class PlaneForm2(forms.Form):
     p2_h = forms.FloatField(label='h')
     p2_k = forms.FloatField(label='k')
     p2_l = forms.FloatField(label='l')
-
-
-class FileForm(forms.Form):
-    file = forms.FileField(label='')

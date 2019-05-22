@@ -1,20 +1,59 @@
 {% extends 'analysis_base.html' %}
+{% load bootstrap4 %}
 
-{% block title %}Direction analysis{% endblock %}
-{% block explain %}
-
+{% block title %}
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            3D direction analysis
+        </li>
+        <li class="list-inline-item">
+            <button type="button" class="btn" data-toggle="modal" data-target="#direc"><i class="fas fa-info-circle fa-2x icon-col"></i></button>
+            <div class="modal fade" id="direc" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="direc">3D direction analysis</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Create pole figure with crystal direction plotted<br>
+                                Input data: <br>
+                                ND and RD of crystal obtained from "OIM analysis"<br>
+                                EBSD rotation angle is from SEM image to EBSD (counterclockwise)<br>
+                                &phi; and &theta; are obtained from 3D software "Amira"
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 {% endblock %}
+
 {% block input %}
 <form action="" method="post">
 {% csrf_token %}
     EBSD<br>
-    ND&nbsp;&nbsp;&nbsp;{{ nd_form }}<br>
-    RD&nbsp;&nbsp;&nbsp;{{ rd_form }}<br>
+    <div class="form-row flex-column flex-sm-row">
+        ND&nbsp;&nbsp;&nbsp;{% bootstrap_form nd_form layout='inline' size='small' %}<br>
+    </div>
+    <div class="form-row flex-column flex-sm-row">
+        RD&nbsp;&nbsp;&nbsp;{% bootstrap_form rd_form layout='inline' size='small' %}<br>
+    </div>
     Direction<br>
-    &phi;=&nbsp;{{ phi_form }}
-    &theta;=&nbsp;{{ theta_form }}<br>
-    EBSD rotation angle {{ rot_form }}<br>
-<input type="submit" value="Submit">
+    <div class="form-row flex-column flex-sm-row">
+        &phi;=&nbsp;{% bootstrap_form phi_form layout='inline' size='small' %}<br>
+    </div>
+    <div class="form-row flex-column flex-sm-row">
+        &theta;=&nbsp;{% bootstrap_form theta_form layout='inline' size='small' %}<br>
+    </div>
+    <div class="form-row flex-column flex-sm-row">
+        EBSD rotation angle&nbsp;{% bootstrap_form rot_form layout='inline' size='small' %}<br>
+    </div>
+<button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}
 

@@ -1,18 +1,60 @@
 {% extends 'analysis_base.html' %}
+{% load bootstrap4 %}
 
-{% block title %}Plane analysis{% endblock %}
-{% block explain %}
-
+{% block title %}
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            3D plane analysis
+        </li>
+        <li class="list-inline-item">
+            <button type="button" class="btn" data-toggle="modal" data-target="#plane"><i class="fas fa-info-circle fa-2x icon-col"></i></button>
+            <div class="modal fade" id="plane" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="plane">3D plane analysis</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Create a histogram of surface normal vectors<br>
+                                Input data: <br>
+                                ND and RD of crystal obtained from "OIM analysis"<br>
+                                EBSD rotation angle is from SEM image to EBSD (counterclockwise)<br>
+                                plane file is only csv file of surface normal vectors obtained from Amira
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 {% endblock %}
+
 {% block input %}
 <form action="" method="post" enctype="multipart/form-data">
 {% csrf_token %}
     EBSD<br>
-    ND&nbsp;&nbsp;&nbsp;{{ nd_form }}<br>
-    RD&nbsp;&nbsp;&nbsp;{{ rd_form }}<br>
-    EBSD rotation angle {{ rot_form }}<br>
-    plane data (CSV file){{ file_form }}<br>
-<input type="submit" value="Submit">
+    <div class="form-row flex-column flex-sm-row">
+        ND&nbsp;&nbsp;&nbsp;{% bootstrap_form nd_form layout='inline' size='small' %}<br>
+    </div>
+    <div class="form-row flex-column flex-sm-row">
+        RD&nbsp;&nbsp;&nbsp;{% bootstrap_form rd_form layout='inline' size='small' %}<br>
+    </div>
+    <div class="form-row flex-column flex-sm-row">
+        EBSD rotation angle&nbsp;{% bootstrap_form rot_form layout='inline' size='small' %}<br>
+    </div>
+    plane file (CSV)
+    <div class="input-group input-group-sm">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" name="file" required>
+        <label class="custom-file-label" for="customFile">Choose file</label>
+    </div>
+    </div>
+    <br>
+<button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}
 

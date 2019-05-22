@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="analysis_menu">
-    <div class="analysis">
-        <h1>Crystallographic analysis menu</h1>
+    <div class="container mt-4">
+        <div class="page_title">
+            <h1>Crystallographic analysis menu</h1>
+        </div>
+        <div class="analysis_menu font-lobster">
+            <div class="pole_menu">
+                <h2>Pole figure from EBSD</h2>
+                <h3><a href="{% url 'analysis:pole_ebsd' %}">Pole figure -normal-</a></h3>
+                <h3><a href="{% url 'analysis:pole_overplot' %}">Pole figure -overplot-</a></h3>
+            <div class="3d_menu">
+                <h2>3D vector & EBSD analysis</h2>
+                <h3><a href="{% url 'analysis:direction_analysis' %}">Direction analysis</a></h3>
+                <h3><a href="{% url 'analysis:plane_analysis' %}">Plane analysis</a></h3>
+            </div>
+            <div class="ks_menu">
+                <h2>K-S OR analysis</h2>
+                <h3><a href="{% url 'analysis:ks_one' %}">K-S OR analysis -basic-</a></h3>
+                <h3><a href="{% url 'analysis:ks_all' %}">K-S OR analysis -auto from EBSD-</a></h3>
+            </div>
+
     </div>
-        <div class="pole_menu">
-            <h2>Pole figure from EBSD</h2>
-            <h3><a href="{% url 'analysis:pole_ebsd' %}">Pole figure -normal-</a></h3>
-            <h3><a href="{% url 'analysis:pole_overplot' %}">Pole figure -overplot-</a></h3>
-        </div>
-        <div class="3d_menu">
-            <h2>3D vector & EBSD analysis</h2>
-            <h3><a href="{% url 'analysis:direction_analysis' %}">Direction analysis</a></h3>
-            <h3><a href="{% url 'analysis:plane_analysis' %}">Plane analysis</a></h3>
-        </div>
-        <div class="ks_menu">
-            <h2>K-S OR analysis</h2>
-            <h3><a href="{% url 'analysis:ks_one' %}">K-S analysis -basic-</a></h3>
-            <h3><a href="{% url 'analysis:ks_all' %}">K-S analysis -auto from EBSD-</a></h3>
-        </div>
     </div>
-
-
-
 {% endblock %}
+
