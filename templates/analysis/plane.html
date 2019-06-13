@@ -47,13 +47,23 @@
         EBSD rotation angle&nbsp;{% bootstrap_form rot_form layout='inline' size='small' %}<br>
     </div>
     plane file (CSV)
-    <div class="input-group input-group-sm">
-    <div class="custom-file">
-        <input type="file" class="custom-file-input" name="file" required>
-        <label class="custom-file-label" for="customFile">Choose file</label>
+    <div class="input-group input-group-sm mb-4">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" name="file" required>
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
     </div>
+    <div class="form-group mb-4">
+        Graph type<br>
+        <div class="form-check form-check-inline mr-4">
+            <input class="form-check-input" type="radio" name="graph_type" id="pf" value="pf" checked>
+            <label class="form-check-label" for="pf">Pole figure</label>
+        </div>
+        <div class="form-check form-check-inline mr-4">
+            <input class="form-check-input" type="radio" name="graph_type" id="ipf" value="ipf">
+            <label class="form-check-label" for="ipf">Inverse pole figure</label>
+        </div>
     </div>
-    <br>
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}
@@ -63,8 +73,9 @@
         EBSD
         ND{{ nd }}
         RD{{ rd }}<br>
-        rotation angle (deg) {{ rot }}<br>
-        plane data {{ file_name }}<br>
+        rotation angle (deg): {{ rot }}<br>
+        plane data: {{ file_name }}<br>
+        Graph type: {{ graph_type }}<br>
     </section>
     <section class="img-result">
             <img src="{% url 'analysis:img_plane' %}" alt="">

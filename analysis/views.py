@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 from . import function_pole
 from . import function_3d
 from . import function_ks
+from . import function_ipf
 
 nd = None
 rd = None
@@ -24,9 +25,11 @@ rd_dir = None
 phi_dir = None
 theta_dir = None
 rot_dir = None
+graph_dir = None
 nd_pla = None
 rd_pla = None
 rot_pla = None
+graph_pla = None
 df_xyz = None
 
 
@@ -156,6 +159,7 @@ def direction_analysis(request):
     global phi_dir
     global theta_dir
     global rot_dir
+    global graph_dir
     f1_d = forms.NdForm()
     f2_d = forms.RdForm()
     f_p = forms.PhiForm()
@@ -170,6 +174,13 @@ def direction_analysis(request):
     phi = request.POST.get('phi', 45)
     theta = request.POST.get('theta', 45)
     rot = request.POST.get('rot', 90)
+    graph_dir = request.POST.get('graph_type', 'pf')
+    if graph_dir == 'pf':
+        graph_type = 'Pole figure'
+    elif graph_dir == 'ipf':
+        graph_type = 'Inverse pole figure'
+    else:
+        graph_type = 'Pole figure'
     nd_pre = [nd_h, nd_k, nd_l]
     rd_pre = [rd_h, rd_k, rd_l]
     nd_dir = [float(s) for s in nd_pre]
@@ -187,6 +198,7 @@ def direction_analysis(request):
            'phi': phi_dir,
            'theta': theta_dir,
            'rot': rot_dir,
+           'graph_type': graph_type,
            }
     return render(request, 'analysis/direction.html', dic)
 
@@ -197,6 +209,7 @@ def img_direction(request):
     global phi_dir
     global theta_dir
     global rot_dir
+    global graph_dir
     plt.clf()
     phi_theta = [0, phi_dir, theta_dir]
     co_list = [[0, 0, 1], [0, 1, 1], [1, 1, 1], [1, 1, 2], [1, 2, 5], [1, 1, 3]]
@@ -204,15 +217,46 @@ def img_direction(request):
     co = function_pole.generate_co(co_list)
     co_norm = function_pole.co_norm(co)
     r_theta = function_pole.xyz2polar(co_norm)
-    a = function_3d.crystal_matrix_rot(nd_dir, rd_dir, rot_dir)
-    xyz = function_3d.phi_theta2xyz(df_dir)
-    cry = function_3d.xyz2co(xyz, a)
-    cry_use = function_3d.south2north(cry)
-    df_polar = function_3d.convert_stereo(cry_use)
-    ax = function_pole.set_polar_axis()
-    function_pole.zone_ax_plot(ax)
-    function_pole.polar_plot(r_theta, ax, "black")
-    function_3d.pol_plot(df_polar, ax, "red")
+    if graph_dir == 'pf':
+        a = function_3d.crystal_matrix_rot(nd_dir, rd_dir, rot_dir)
+        xyz = function_3d.phi_theta2xyz(df_dir)
+        cry = function_3d.xyz2co(xyz, a)
+        cry_use = function_3d.south2north(cry)
+        df_polar = function_3d.convert_stereo(cry_use)
+        ax = function_pole.set_polar_axis()
+        function_pole.zone_ax_plot(ax)
+        function_pole.polar_plot(r_theta, ax, "black")
+        function_3d.pol_plot(df_polar, ax, "red")
+    elif graph_dir == 'ipf':
+        a = function_3d.crystal_matrix_rot(nd_dir, rd_dir, rot_dir)
+        xyz = function_3d.phi_theta2xyz(df_dir)
+        cry = function_3d.xyz2co(xyz, a)
+        cry_use = function_3d.south2north(cry)
+        cry_ipf = function_ipf.change_ipf(cry_use)
+        df_polar = function_3d.convert_stereo(cry_ipf)
+        frame_101 = np.zeros((0, 3))
+        for i in range(-10, 10):
+            for s in range(-10, 10):
+                x = i
+                y = s
+                z = i
+                part = [x, y, z]
+                frame_ = np.array(part)
+                frame_101 = np.vstack((frame_101, frame_))
+        frame_101_k = function_ipf.change_ipf(frame_101)
+        frame_bottom = np.array([[1, 0, 1]])
+        frame_upper = np.array([[1, 1, 1]])
+        ax = function_ipf.axis_ipf2()
+        pol_101 = function_ipf.co2polar(frame_101_k)
+        pol_bottom = function_ipf.co2polar(frame_bottom)
+        pol_bottom.loc["add"] = [0, 0, 0]
+        pol_upper = function_ipf.co2polar(frame_upper)
+        pol_upper.loc["add"] = [0, 0, 0]
+        function_ipf.polar_line(ax, pol_101)
+        function_ipf.polar_line(ax, pol_bottom)
+        function_ipf.polar_line(ax, pol_upper)
+        function_ipf.polar_plot_k(r_theta, ax, "black")
+        function_ipf.pol_plot(df_polar, ax, "red")
     png = plt2png()
     plt.cla()
     response = HttpResponse(png, content_type='image/png')
@@ -223,6 +267,7 @@ def plane_analysis(request):
     global nd_pla
     global rd_pla
     global rot_pla
+    global graph_pla
     global df_xyz
     f1_d = forms.NdForm()
     f2_d = forms.RdForm()
@@ -234,6 +279,13 @@ def plane_analysis(request):
     rd_k = request.POST.get('rd_k', -1)
     rd_l = request.POST.get('rd_l', 0)
     rot = request.POST.get('rot', 90)
+    graph_pla = request.POST.get('graph_type', 'pf')
+    if graph_pla == 'pf':
+        graph_type = 'Pole figure'
+    elif graph_pla == 'ipf':
+        graph_type = 'Inverse pole figure'
+    else:
+        graph_type = 'Pole figure'
     nd_pre = [nd_h, nd_k, nd_l]
     rd_pre = [rd_h, rd_k, rd_l]
     nd_pla = [float(s) for s in nd_pre]
@@ -257,6 +309,7 @@ def plane_analysis(request):
            'rd': rd_pla,
            'rot': rot_pla,
            'file_name': name,
+           'graph_type': graph_type,
            }
     return render(request, 'analysis/plane.html', dic)
 
@@ -265,6 +318,7 @@ def img_plane(request):
     global nd_pla
     global rd_pla
     global rot_pla
+    global graph_pla
     global df_xyz
     if df_xyz is None:
         response = None
@@ -274,17 +328,56 @@ def img_plane(request):
         co = function_pole.generate_co(co_list)
         co_norm = function_pole.co_norm(co)
         r_theta = function_pole.xyz2polar(co_norm)
-        a = function_3d.crystal_matrix_rot(nd_pla, rd_pla, rot_pla)
-        xyz = np.array(df_xyz)
-        cry = function_3d.xyz2co(xyz, a)
-        cry_use = function_3d.south2north(cry)
-        df_polar = function_3d.convert_stereo(cry_use)
-        df_r_theta = df_polar.drop("theta_rad", axis=1)
-        df_hist = function_3d.create_hist(df_r_theta)
-        ax = function_pole.set_polar_axis()
-        function_3d.plot_hist(df_hist, ax)
-        function_pole.zone_ax_plot(ax)
-        function_pole.polar_plot(r_theta, ax, "black")
+        if graph_pla == 'pf':
+            a = function_3d.crystal_matrix_rot(nd_pla, rd_pla, rot_pla)
+            xyz = np.array(df_xyz)
+            cry = function_3d.xyz2co(xyz, a)
+            cry_use = function_3d.south2north(cry)
+            df_polar = function_3d.convert_stereo(cry_use)
+            df_r_theta = df_polar.drop("theta_rad", axis=1)
+            df_hist = function_3d.create_hist(df_r_theta)
+            ax = function_pole.set_polar_axis()
+            function_3d.plot_hist(df_hist, ax)
+            function_pole.zone_ax_plot(ax)
+            function_pole.polar_plot(r_theta, ax, "black")
+        elif graph_pla == 'ipf':
+            frame_101 = np.zeros((0, 3))
+            for i in range(-15, 15):
+                for s in range(-15, 15):
+                    x = i
+                    y = s
+                    z = i
+                    part = [x, y, z]
+                    frame_ = np.array(part)
+                    frame_101 = np.vstack((frame_101, frame_))
+            frame_bottom = np.array([[1, 0, 1]])
+            frame_upper = np.array([[1, 1, 1]])
+            a = function_3d.crystal_matrix_rot(nd_pla, rd_pla, rot_pla)
+            xyz = np.array(df_xyz)
+            cry = function_3d.xyz2co(xyz, a)
+            cry_use = function_3d.south2north(cry)
+            cry_ipf = function_ipf.change_ipf(cry_use)
+            df_polar = function_3d.convert_stereo(cry_ipf)
+            df_r_theta = df_polar.drop("theta_rad", axis=1)
+            df_hist = function_3d.create_hist(df_r_theta)
+            ax = function_ipf.axis_ipf()
+            pol_101 = function_ipf.co2polar(frame_101)
+            pol_bottom = function_ipf.co2polar(frame_bottom)
+            pol_bottom.loc["add"] = [0, 0, 0]
+            pol_upper = function_ipf.co2polar(frame_upper)
+            pol_upper.loc["add"] = [0, 0, 0]
+            function_ipf.polar_line(ax, pol_101)
+            function_ipf.polar_line(ax, pol_bottom)
+            function_ipf.polar_line(ax, pol_upper)
+            co = function_pole.generate_co(co_list)
+            co_norm = function_pole.co_norm(co)
+            r_theta = function_pole.xyz2polar(co_norm)
+            xx = np.ones(len(pol_101))
+            yy = pd.DataFrame(xx.T)
+            zz = pol_101.join(yy)
+            function_ipf.plot_hist_k(df_hist, ax)
+            function_ipf.polar_plot_k(r_theta, ax, "black")
+            ax.fill_between(zz.iloc[:, 2], zz.iloc[:, 0], zz.iloc[:, 3], facecolors="white")
         png = plt2png()
         plt.cla()
         response = HttpResponse(png, content_type='image/png')
