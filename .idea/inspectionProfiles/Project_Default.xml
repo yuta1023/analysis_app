@@ -11,6 +11,10 @@
           <option value="tuple.set_xticklabels" />
           <option value="tuple.set_thetamax" />
           <option value="tuple.set_axis_off" />
+          <option value="tuple.set_ylim" />
+          <option value="tuple.set_xlim" />
+          <option value="tuple.set_xlabel" />
+          <option value="tuple.set_ylabel" />
         </list>
       </option>
     </inspection_tool>

@@ -1,0 +1,100 @@
+{% extends 'graph/graph_base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            2D plot
+        </li>
+        <li class="list-inline-item">
+        </li>
+    </ul>
+{% endblock %}
+
+{% block input %}
+    data file (CSV file)
+    <div class="input-group input-group-sm mb-4">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" name="file" required>
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+    </div>
+    <div class="form-group mb-4">
+        graph type<br>
+        <div class="form-check ml-2">
+            <input class="form-check-input" type="radio" name="g_type" id="line" value="line" checked>
+            <label class="form-check-label" for="line">line plot</label>
+        </div>
+        <div class="form-check ml-2">
+            <input class="form-check-input" type="radio" name="g_type" id="scatter" value="scatter">
+            <label class="form-check-label" for="scatter">scatter plot</label>
+        </div>
+        <div class="form-check ml-2">
+            <input class="form-check-input" type="radio" name="g_type" id="both" value="both">
+            <label class="form-check-label" for="both">line & scatter plot</label>
+        </div>
+        <br>
+        Data columns<br>
+        <div class="form-check form-check-inline ml-4 mr-4">
+            <label class="form-check-label" for="x_num">x data column number</label>
+            <input class="form-check-input ml-3 text-center form-control" type="number" name="x_num" id="x_num" value="1" style="width: 70px" required>
+        </div>
+        <div class="form-check form-check-inline ml-4 mr-4">
+            <label class="form-check-label" for="y_num">y data column number</label>
+            <input class="form-check-input ml-3 text-center form-control" type="number" name="y_num" id="y_num" value="2" style="width: 70px" required>
+        </div>
+    </div>
+{% endblock %}
+
+{% block setting %}
+<div class="form-group mb-4">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="option" id="default" value="default" checked>
+        <label class="form-check-label" for="default">Default</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="option" id="custom" value="custom">
+        <label class="form-check-label" for="custom">Custom</label>
+    </div>
+    <div class="form-check form-check-inline ml-4 mr-4">
+        axis label
+        <label class="form-check-label ml-4" for="label_x">x_label</label>
+        <input class="form-check-input ml-3 text-center form-control" type="text" name="label_x" id="label_x" value="x" style="width: 120px" required>
+    </div>
+    <div class="form-check form-check-inline ml-4 mr-4">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label class="form-check-label ml-4" for="label_y">y_label</label>
+        <input class="form-check-input ml-3 text-center form-control" type="text" name="label_y" id="label_y" value="y" style="width: 120px" required>
+    </div>
+    <div class="form-check form-check-inline mr-4">
+        <label class="form-check-label ml-4" for="x_min">axis range&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input class="form-check-input ml-5 text-center form-control" type="number" step="0.1" name="x_min" id="x_min" value="0" style="width: 80px" required>
+        <label class="form-check-label ml-1" for="x_max">-</label>
+        <input class="form-check-input ml-1 text-center form-control" type="number" step="0.1" name="x_max" id="x_max" value="10" style="width: 80px" required>
+    </div>
+    <div class="form-check form-check-inline mr-4">
+        <label class="form-check-label ml-4" for="y_min">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input class="form-check-input ml-5 text-center form-control" type="number" step="0.1" name="y_min" id="y_min" value="0" style="width: 80px" required>
+        <label class="form-check-label ml-1" for="y_max">-</label>
+        <input class="form-check-input ml-1 text-center form-control" type="number" step="0.1" name="y_max" id="y_max" value="10" style="width: 80px" required>
+    </div>
+    mesh grid
+    <div class="form-check form-check-inline ml-4 mr-4">
+        <input class="form-check-input" type="radio" name="mesh" id="on" value="on" checked>
+        <label class="form-check-label" for="on">on</label>
+    </div>
+    <div class="form-check form-check-inline mr-4">
+        <input class="form-check-input" type="radio" name="mesh" id="off" value="off">
+        <label class="form-check-label" for="off">off</label>
+    </div>
+</div>
+{% endblock %}
+
+{% block result %}
+    <section>
+
+    </section>
+    <section class="img-result">
+    <img src="{% url 'graph:img_2d_plot' %}" alt="">
+    </section>
+{% endblock %}

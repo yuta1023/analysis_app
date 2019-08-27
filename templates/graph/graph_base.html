@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="graph_base mt-4">
+        <h1 class='graph_title font-lobster'> {% block title %}{% endblock %}</h1>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 order-md-1">
+                <h2>Input data</h2>
+                {% block input %}
+
+                {% endblock %}
+            </div>
+            <div class="col-md-6 order-md-2">
+                <h2>Graph setting</h2>
+                {% block setting %}
+
+                {% endblock %}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+        <br>
+        <br>
+        <br>
+        <p class="double"></p>
+        <h2>Result</h2>
+        {% block result %}
+
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="page_title">
+            <h1>Graph menu</h1>
+        </div>
+        <div class="graph_menu font-lobster">
+            <div class="2d_graph">
+                <h2>2D graph</h2>
+                <h3><a href="{% url 'graph:plot_2d' %}">2D plot</a></h3>
+                <h3><a href="{% url 'graph:hist_2d' %}">2D histogram</a></h3>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -35,6 +35,17 @@
                      <a class="dropdown-item" href="{% url 'analysis:menu' %}">Menu list</a>
                  </div>
              </li>
+             <li class="nav-item dropdown">
+                 <a href="" class="nav-link dropdown-toggle" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Graph
+                 </a>
+                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                     <a class="dropdown-item" href="{% url 'graph:plot_2d' %}">2D plot</a>
+                     <a class="dropdown-item" href="{% url 'graph:hist_2d' %}">2D histogram</a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="{% url 'graph:graph_menu' %}">Menu list</a>
+                 </div>
+             </li>
              <li class="nav-item"><a href="{% url 'info:link' %}" class="nav-link">Link</a></li>
          </ul>
         <div class="container ml-md-5 content">

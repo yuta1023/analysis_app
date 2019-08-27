@@ -321,7 +321,7 @@ def img_plane(request):
     global graph_pla
     global df_xyz
     if df_xyz is None:
-        response = None
+        response = HttpResponse('')
     else:
         plt.clf()
         co_list = [[0, 0, 1], [0, 1, 1], [1, 1, 1], [1, 1, 2], [1, 2, 5], [1, 1, 3]]
